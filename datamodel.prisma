@@ -1,4 +1,118 @@
 type User {
   id: ID! @unique
   name: String!
+  email: String! @unique
+  character: [Character]
+}
+
+type Character {
+  id: ID! @unique
+  name: String!
+  user: User!
+  class: Class!
+  stuffs: [Stuff!]!
+}
+
+type Stuff {
+  id: ID! @unique
+  character: Character!
+  items: [ItemInstance!]!
+}
+
+
+type ItemInstance {
+  id: ID! @unique
+  stuff: Stuff!
+  item: Item
+  itemInstanceStat: Stat!
+}
+
+type Stat {
+  ID: ID! @unique
+  AP: int
+  MP: int
+  range: int
+  summons: int
+  critical: int
+  dommage: int
+  vitality: int
+  wisdom: int
+  agility: int
+  chance: int
+  strength: int
+  intelligence: int
+  percDommage: int
+  trapDommage: int
+  percTrapDommage: int
+  percResAgility: int
+  percResChance: int
+  percResStrength: int
+  percResIntelligence: int
+  percResFighterAgility: int
+  percResFighterChance: int
+  percResFighterStrength: int
+  percResFighterIntelligence: int
+  prospection: int
+}
+
+##################################
+############# static #############
+##################################
+
+type Class {
+  id: ID! @unique
+
+  statLevel: StatLevel!
+  spells: [Spell!]!
+  
+  characters: [Character!]!
+}
+
+type Sets {
+
+}
+type Spell {
+  id: ID! @unique
+  class: Class
+}
+
+type Item {
+  id: ID! @unique
+  itemsInstance: [ItemInstance!]!
+  itemsStat: [StatRange!]!
+}
+
+type CharacterStatBonus {
+  id: ID! @unique
+  vitality: int! @default(value: 0)
+  agility: int! @default(value: 0)
+  chance: int! @default(value: 0)
+  strength: int! @default(value: 0)
+  intelligence: int! @default(value: 0)
+}
+
+type ItemStat {
+  ID: ID! @unique
+  AP: StatRange
+  MP: StatRange
+  range: StatRange
+  summons: StatRange
+  critical: StatRange
+  dommage: StatRange
+  vitality: StatRange
+  wisdom: StatRange
+  agility: StatRange
+  chance: StatRange
+  strength: StatRange
+  intelligence: StatRange
+  percDommage: StatRange
+  trapDommage: StatRange
+  percTrapDommage: StatRange
+  percResAgility: StatRange
+}
+
+type StatRange {
+  id: ID! @unique
+  min: int!
+  max: int!
 }
